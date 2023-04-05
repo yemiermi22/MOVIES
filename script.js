@@ -1,11 +1,12 @@
-
-    function createCard(title, image, description) {
+<script>
+  
+    function createCard(title, image, description){
       const card = document.createElement("div");
-      card.className = "col-sm-6 col-md-4 col-lg-3 mb-4";
-
-      const imgWrapper = document.createElement("div");
-      imgWrapper.className = "card-img-wrapper";
-      card.appendChild(imgWrapper);
+      
+   
+      // const imgWrapper = document.createElement("div");
+      // imgWrapper.className = "card-img-wrapper";
+      // card.appendChild(imgWrapper);
 
       const img = document.createElement("img");
       img.src = image;
@@ -22,27 +23,13 @@
       h4.textContent = title;
       cardBody.appendChild(h4);
 
-      const p = document.createElement("p");
-      p.className = "card-text";
-      p.textContent = description;
-      cardBody.appendChild(p);
 
-      const addButton = document.createElement("button");
-      addButton.className = "btn btn-dark";
-      addButton.textContent = "Watch Now";
-      addButton.addEventListener("click", function () {
-        console.log("Added", title, "to My List");
-      });
-      cardBody.appendChild(addButton);
-
-      return card;
-    }
-
+      }
     function search() {
-      const searchInput = document.getElementById("searchInput").value.trim();
+      const searchInput = document.getElementById("searchBtn").value.trim();
       if (!searchInput) return;
 
-      fetch("https://imdb-api.com/API/Search/k_j1oyp2ho/${searchInput}")
+      fetch("https://imdb-api.com/en/API/SearchAll/k_h52f5864/")
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -52,7 +39,7 @@
             const card = createCard(
               result.title,
               result.image,
-              result.description
+              //result.description
             );
             output.appendChild(card);
           });
@@ -68,23 +55,52 @@
           const output = document.getElementById("output");
           output.innerHTML = "";
           data.items.forEach((item) => {
-            const card = createCard(item.title, item.image, item.description);
+            const card = createCard(item.image, item.title);
             output.appendChild(card);
           });
         })
         .catch((error) => console.error(error));
     }
-    function displayMostPopularTVs() {
-fetchAndDisplay('https://imdb-api.com/API/MostPopularTVs/k_3e39uoq2');
+    function DisplayBoxOffice () {
+fetchAndDisplay('https://imdb-api.com/API/BoxOffice/k_h52f5864');
 }
 
 
-    function displayComingSoon() {
-      fetchAndDisplay("https://imdb-api.com/API/ComingSoon/k_j1oyp2ho");
+    function DispalySeasonEpisodes() {
+      fetchAndDisplay("https://imdb-api.com/API/SeasonEpisodes/k_h52f5864/string/1");
     }
 
+    function DispalyMostPopularMovies() {
+    fetchAndDisplay("https://imdb-api.com/API/MostPopularMovies/k_h52f5864");
+  }
+  function DispalyYouTubeTrailer() {
+    fetchAndDisplay("https://imdb-api.com/API/YouTubeTrailer/k_h52f5864/1")
+  }
+  //Dispay 
+  function fun(id){
+  fetch('https://imdb-api.com/en/API/Title/k_12345678/tt1375666')
+  
+  .then(response =>{
+    if(!response.ok){
+      throw Error("Error");
+    }
+      return response.json();
+      })
+      .then(data=>{
+        console.log(data);
+        const movie =
+     `<div class="movies">
+      
+      <li><button><img src="${data.image.items}"></button> </li>
+      <li><p> ${data.items.description}</p></li>
+      <li>name ${data.items.title}</li>
+      </div>`;
+      
+    document.querySelector('#movie').innerHTML+=movie
+        
+})
+}
 
+   
 
-
-
-
+  </script>
