@@ -1,146 +1,68 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>movies</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
-  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
 </head>
 <body>
-
+      
+    <center>  <h1>My movies </h1></center>
+            </div>
   
-    <div class="container">
-      <h2>my movies </h2>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-          </li>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-        </div>
-      </div>
-    </div>
-  </section>
-  
-
-
-  <div class="container my-4">
-    <form class="form-inline justify-content-center">
-      <div class="input-group">
-        <input type="text" class="form-control" id="searchInput" placeholder="Search ">
-        <div class="input-group-append">
-          <button type="button" class="btn btn-primary rounded-0" onclick="search()">Search</button>
+            <img src="photo_2023-03-24_21-12-39.jpg" style="width:300px";>
+            <img src="photo_2022-11-09_10-34-42.jpg"style="width:200px">
+         <img src="photo_2022-11-14_14-29-58.jpg" style="width:200px";>
+        <img src="photo_2022-12-26_12-16-01.jpg" style="width:200px";>
+   
+    
+    
+    <center>       <input id="movieName" type="text" placeholder="Enter Movie Name">
+      <button id="searchBtn">Search</button></center>
         </div>
       </div>
     </form>
   </div>
   
-  <div class="container text-center">
-    
-      <button type="button" class="btn btn-outline-secondary rounded-0" onclick="displayComingSoon()">Coming Soon</button><br></br>
-      <button type="button" class="btn btn-outline-secondary rounded-0" onclick="displayMostPopularTVs()"> Popular TV Shows</button>
+  <div class="continer text-left">
+     
+      <button type="button" class="btn btn-outline-secondary" onclick="DisplayBoxOffice()">Box office</button><br></br>
+      <button type="button" class="btn btn-outline-secondary " onclick="DispalySeasonEpisodes()"> SeasonEpisodes</button><br></br>
+      <button type="button" class="btn btn-outline-secondary " onclick="DispalyMostPopularMovies()"> MostPopularMovies</button><br></br>
+      <button type="button" class="btn btn-outline-secondary " onclick="DispalyYouTubeTrailer()"> YouTubeTrailer</button>
     </div>
   </div>
+  
+ <!-- <div id="movie"></div> -->
+    <!-- <div id="output" class="col-md-5"></div> -->
+  <!-- </div> -->
+  <!-- <div class="header"> -->
+    <!-- <h1>MY MOVIES</h1> -->
+    <!-- <p>Enjoy</p> -->
+  <!-- </div> -->
+  <!-- <style> -->
 
- 
-    <div id="output" class="row"></div>
-  </div>
-<script>
-    function createCard(title, image, description) {
-      const card = document.createElement("div");
-      
-
-      const imgWrapper = document.createElement("div");
-      imgWrapper.className = "card-img-wrapper";
-      card.appendChild(imgWrapper);
-
-      const img = document.createElement("img");
-      img.src = image;
-      img.alt = title;
-      img.className = "card-img-top";
-      imgWrapper.appendChild(img);
-
-      const cardBody = document.createElement("div");
-      cardBody.className = "card-body";
-      card.appendChild(cardBody);
-
-      const h4 = document.createElement("h4");
-      h4.className = "card-title";
-      h4.textContent = title;
-      cardBody.appendChild(h4);
-
-      const p = document.createElement("p");
-      p.className = "card-text";
-      p.textContent = description;
-      cardBody.appendChild(p);
-
-      const addButton = document.createElement("button");
-      addButton.className = "btn btn-dark";
-      addButton.textContent = "Watch Now";
-      addButton.addEventListener("click", function () {
-        console.log("Added", title, "to My List");
-      });
-      cardBody.appendChild(addButton);
-
-      return card;
-    }
-
-    function search() {
-      const searchInput = document.getElementById("searchInput").value.trim();
-      if (!searchInput) return;
-
-      fetch("https://imdb-api.com/API/Search/k_j1oyp2ho/${searchInput}")
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          const output = document.getElementById("output");
-          output.innerHTML = "";
-          data.results.forEach((result) => {
-            const card = createCard(
-              result.title,
-              result.image,
-              result.description
-            );
-            output.appendChild(card);
-          });
-        })
-        .catch((error) => console.error(error));
-    }
-
-    function fetchAndDisplay(url) {
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          const output = document.getElementById("output");
-          output.innerHTML = "";
-          data.items.forEach((item) => {
-            const card = createCard(item.title, item.image, item.description);
-            output.appendChild(card);
-          });
-        })
-        .catch((error) => console.error(error));
-    }
-    function displayMostPopularTVs() {
-fetchAndDisplay('https://imdb-api.com/API/MostPopularTVs/k_3e39uoq2');
+   </style> 
+  <style>
+    footer {
+  text-align: center;
+  padding: 4px;
+  background-color: DarkSalmon;
+  color: white;
 }
+</style>
+</head>
+<body>
+
+<footer>
+  <p>Author: yemisrach ermiyas<br>
+  <a href="mailto:hege@example.com">yemiermiyas@gmail,com</a></p>
+</footer>
+
+  </style>
 
 
-    function displayComingSoon() {
-      fetchAndDisplay("https://imdb-api.com/API/ComingSoon/k_j1oyp2ho");
-    }
-  </script>
 
-   
-</body>
-</html>
 
 
 
